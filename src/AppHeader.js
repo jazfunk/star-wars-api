@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 
 class AppHeader extends Component {
-  render() {
+  render = () => {
     return (
-      <header>
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          STAR WARS API
-        </div>
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        STAR WARS API
       </header>
     );
   }

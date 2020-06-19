@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import jklogo from "./images/titleGraphicWithLogoOPTIMIZED.svg";
 
 class AppFooter extends Component {
-  render() {
+  render = () => {
     return (
       <footer className="App-footer">
         <img id="jk-logo" src={jklogo} alt="Jeff King" />

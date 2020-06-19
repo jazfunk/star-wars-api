@@ -37,6 +37,8 @@
 }
 
 .App-main {
+  background: url('images/DarthVadarFace_Sky_TRANS.jpg') no-repeat center center fixed;
+  background-size: cover;
   min-height: 75vh;
   display: flex;
   flex-direction: column;
