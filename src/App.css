@@ -1,17 +1,13 @@
-html { 
-  background: url(images/DarthVadar_Dark.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
 .App {
   text-align: center;
+  background: url(images/DarthVadar_Dark.jpg) no-repeat center center fixed; 
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vw;;
 }
 
 .App-logo {
-  height: 8vmin;
+  height: 6vmin;
   pointer-events: none;
 }
 
@@ -21,18 +17,23 @@ html {
   }
 }
 
+#jk-logo {
+  height: 5vmin;
+}
+
 .App-header {
-  min-height: 10vh;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  font-size: 6vmin;
+  font-weight: bold;
   color: white;
 }
 
 .App-main {
-  min-height: 80vh;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,13 +48,22 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
+  font-size: calc(8px + 1vmin);
+  color: #FEFFFF;
 }
 
-.App-link {
-  color: #61dafb;
+a:link {
+  color: #DEF2F1;
+}
+a:visited {
+  color: #2B7A78;
+}
+a:hover {
+  color: #FEFFFF;
+}
+a:active {
+  color: #17252A;
 }
 
 @keyframes App-logo-spin {
