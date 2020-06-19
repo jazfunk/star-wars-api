@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import jklogo from "./images/titleGraphicWithLogoOPTIMIZED.svg";
-import "./App.css";
 
 class AppFooter extends Component {
   render() {

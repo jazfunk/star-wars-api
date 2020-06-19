@@ -1,9 +1,9 @@
 .App {
   text-align: center;
-  background: url(images/DarthVadar_Dark.jpg) no-repeat center center fixed; 
+  background: url(images/DarthVadar_Dark.jpg) no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
-  min-width: 100vw;;
+  min-width: 100vw;
 }
 
 .App-logo {
@@ -19,6 +19,11 @@
 
 #jk-logo {
   height: 5vmin;
+}
+
+#main-image {
+  height: 70vh;
+  opacity: 0.5;
 }
 
 .App-header {
@@ -40,30 +45,31 @@
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
+  position: relative;
 }
 
 .App-footer {
-  background-color: #3AAFA9;
+  background-color: #3aafa9;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   font-size: calc(8px + 1vmin);
-  color: #FEFFFF;
+  color: #feffff;
 }
 
 a:link {
-  color: #DEF2F1;
+  color: #def2f1;
 }
 a:visited {
-  color: #2B7A78;
+  color: #def2f1;
 }
 a:hover {
-  color: #FEFFFF;
+  color: #feffff;
 }
 a:active {
-  color: #17252A;
+  color: #17252a;
 }
 
 @keyframes App-logo-spin {
