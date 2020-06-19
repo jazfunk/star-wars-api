@@ -19,19 +19,13 @@
   height: 5vmin;
 }
 
-#main-image {
-  height: 70vh;
-  width: 100vh;
-  opacity: 0.5;
-}
-
 .App-header {
   min-height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  font-size: 6vmin;
+  font-size: 6vh;
   font-weight: bold;
   color: white;
 }
