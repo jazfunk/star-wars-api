@@ -1,9 +1,7 @@
 .App {
   text-align: center;
-  background: url(images/DarthVadar_Dark.jpg) no-repeat center center fixed;
+  background: url('images/DarthVadar_Dark.jpg') no-repeat center center fixed;
   background-size: cover;
-  min-height: 100vh;
-  min-width: 100vw;
 }
 
 .App-logo {
@@ -23,6 +21,7 @@
 
 #main-image {
   height: 70vh;
+  width: 100vh;
   opacity: 0.5;
 }
 
@@ -56,6 +55,7 @@
   align-items: center;
   justify-content: space-around;
   font-size: calc(8px + 1vmin);
+  font-weight: bold;
   color: #feffff;
 }
 
