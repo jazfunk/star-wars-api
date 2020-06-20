@@ -48,10 +48,18 @@ class CharactersComponent extends Component {
 
   handleNext = (event) => {
     console.log("next button clicked")
+    const nextTen = this.state.nextURL
+    this.setState({
+      peopleURL: nextTen,
+    })
   }
 
   handlePrevious = (event) => {
     console.log("prev button clicked")
+    const previousTen = this.state.prevURL
+    this.setState({
+      peopleURL: previousTen,
+    })
   }
 
   componentDidUpdate = (prevProps, prevState) => {
