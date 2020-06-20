@@ -19,6 +19,10 @@
   height: 5vmin;
 }
 
+.table-bg {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
 .App-header {
   min-height: 15vh;
   display: flex;

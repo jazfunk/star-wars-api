@@ -21,8 +21,8 @@ const CharactersTable = (props) => {
 
   return (
     <div>
-      <ReactBootStrap.Table striped bordered hover>
-        <thead className="thead-dark">
+      <ReactBootStrap.Table className="table-dark table-striped table-bordered table-hover table-bg">
+        <thead>
           <tr>
             <th>Name</th>
             <th>Birth Year</th>
