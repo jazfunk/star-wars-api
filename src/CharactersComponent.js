@@ -7,7 +7,7 @@ class CharactersComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      peopleURL: "http://swapi.dev/api/people/",
+      peopleURL: "https://swapi.dev/api/people/",
       searchPhrase: '',
       nextURL: '',
       prevURL: '',
@@ -39,7 +39,7 @@ class CharactersComponent extends Component {
 
   handleSearch = (event) => {
     event.preventDefault();
-    const searchBaseURL = 'http://swapi.dev/api/people/?search='
+    const searchBaseURL = 'https://swapi.dev/api/people/?search='
     const newPeopleURL = `${searchBaseURL}${this.state.searchPhrase}`
     this.setState({
       peopleURL: newPeopleURL,
@@ -47,24 +47,21 @@ class CharactersComponent extends Component {
   }
 
   handleNext = (event) => {
-    console.log("next button clicked")
-    const nextTen = this.state.nextURL
+    const nextPage = this.state.nextURL
     this.setState({
-      peopleURL: nextTen,
+      peopleURL: nextPage,
     })
   }
 
   handlePrevious = (event) => {
-    console.log("prev button clicked")
-    const previousTen = this.state.prevURL
+    const previousPage = this.state.prevURL
     this.setState({
-      peopleURL: previousTen,
+      peopleURL: previousPage,
     })
   }
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.peopleURL !== this.state.peopleURL) {
-      console.log(this.state.peopleURL)
       axios
       .get(this.state.peopleURL)
       .then((response) => {
