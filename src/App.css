@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   background: url('images/DarthVadar_Dark.jpg') no-repeat center center fixed;
   background-size: cover;
 }
@@ -19,8 +18,17 @@
   height: 5vmin;
 }
 
-.table-bg {
+.table-bg-trans {
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+.form-container {
+  display: flex;
+}
+
+.body-main-table {
+  border: 1px #feffff solid;
+  width: 100vw;
 }
 
 .App-header {
@@ -42,8 +50,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
-  color: white;
   position: relative;
 }
 

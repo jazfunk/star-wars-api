@@ -8,21 +8,21 @@ const CharactersTable = (props) => {
 
       return (
         <tr key={index}>
-          <td className="align-middle">{character.name}</td>
-          <td className="align-middle">{character.birth_year}</td>
-          <td className="align-middle">{character.height}</td>
-          <td className="align-middle">{character.mass}</td>
-          <td className="align-middle">{character.homeworld}</td>
-          <td className="align-middle">{character.species}</td>
+          <td className="align-left">{character.name}</td>
+          <td>{character.birth_year}</td>
+          <td>{character.height}</td>
+          <td>{character.mass}</td>
+          <td>{character.homeworld}</td>
+          <td>{character.species}</td>
         </tr>
       );
     }
   };
 
   return (
-    <div>
-      <ReactBootStrap.Table className="table-dark table-striped table-bordered table-hover table-bg">
-        <thead>
+    <div className="body-main-table">
+      <ReactBootStrap.Table className="table-sm table-dark table-striped table-bordered table-hover table-bg-trans">
+        <thead className="thead-light">
           <tr>
             <th>Name</th>
             <th>Birth Year</th>
