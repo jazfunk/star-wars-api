@@ -9,7 +9,6 @@ class CharactersComponent extends Component {
     this.state = {
       peopleURL: "https://swapi.dev/api/people/",
       searchPhrase: '',
-      searchURL: '',
       nextURL: '',
       prevURL: '',
       characters: [],
@@ -40,11 +39,37 @@ class CharactersComponent extends Component {
 
   handleSearch = (event) => {
     event.preventDefault();
-    const searchBase = 'https://swapi.dev/api/people/?search='
-    const searchText = this.state.searchPhrase
+    const searchBaseURL = 'https://swapi.dev/api/people/?search='
+    const newPeopleURL = `${searchBaseURL}${this.state.searchPhrase}`
     this.setState({
-      searchURL: `${searchBase}${searchText}`,
+      peopleURL: newPeopleURL,
     })    
+  }
+
+  handleNext = (event) => {
+    console.log("next button clicked")
+  }
+
+  handlePrevious = (event) => {
+    console.log("prev button clicked")
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.peopleURL !== this.state.peopleURL) {
+      console.log(this.state.peopleURL)
+      axios
+      .get(this.state.peopleURL)
+      .then((response) => {
+        this.setState({ 
+          characters: response.data.results,
+          nextURL: response.data.next,
+          prevURL: response.data.previous,
+         });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
   }
 
   render() {
@@ -61,8 +86,8 @@ class CharactersComponent extends Component {
             required={true}
           />&nbsp;
           <Button id="btn-search" className="btn-info" onClick={this.handleSearch}>Search</Button>&nbsp;
-          <Button id="btn-prev">Prev</Button>&nbsp;
-          <Button id="btn-next">Next</Button>
+          <Button id="btn-prev" onClick={this.handlePrevious}>Prev</Button>&nbsp;
+          <Button id="btn-next" onClick={this.handleNext}>Next</Button>
         </div>
         <br></br>
         <CharactersTable characters={this.state.characters} />

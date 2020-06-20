@@ -27,8 +27,8 @@
 }
 
 .body-main-table {
-  border: 1px #feffff solid;
-  width: 100vw;
+  border: 0px #feffff solid;
+  width: 90vw;
 }
 
 .App-header {

@@ -22,7 +22,7 @@ const CharactersTable = (props) => {
   return (
     <div className="body-main-table">
       <ReactBootStrap.Table className="table-sm table-dark table-striped table-bordered table-hover table-bg-trans">
-        <thead className="thead-light">
+        <thead>
           <tr>
             <th>Name</th>
             <th>Birth Year</th>
