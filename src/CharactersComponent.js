@@ -8,9 +8,9 @@ class CharactersComponent extends Component {
     super(props);
     this.state = {
       peopleURL: "https://swapi.dev/api/people/",
-      searchPhrase: '',
-      nextURL: '',
-      prevURL: '',
+      searchPhrase: "",
+      nextURL: "",
+      prevURL: "",
       characters: [],
     };
   }
@@ -19,11 +19,11 @@ class CharactersComponent extends Component {
     axios
       .get(this.state.peopleURL)
       .then((response) => {
-        this.setState({ 
+        this.setState({
           characters: response.data.results,
           nextURL: response.data.next,
           prevURL: response.data.previous,
-         });
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -34,65 +34,86 @@ class CharactersComponent extends Component {
     event.preventDefault();
     this.setState({
       searchPhrase: event.target.value,
-    })
-  }
+    });
+  };
 
   handleSearch = (event) => {
     event.preventDefault();
-    const searchBaseURL = 'https://swapi.dev/api/people/?search='
-    const newPeopleURL = `${searchBaseURL}${this.state.searchPhrase}`
+    const searchBaseURL = "https://swapi.dev/api/people/?search=";
+    const newPeopleURL = `${searchBaseURL}${this.state.searchPhrase}`;
     this.setState({
       peopleURL: newPeopleURL,
-    })    
-  }
+    });
+  };
 
   handleNext = (event) => {
-    const nextPage = this.state.nextURL
-    this.setState({
-      peopleURL: nextPage,
-    })
-  }
+    let unsecureURL = this.state.nextURL;
+    let nextPage;
+    if (unsecureURL) {
+      nextPage = unsecureURL.slice(0, 4) + "s" + unsecureURL.slice(4);
+      this.setState({
+        peopleURL: nextPage,
+      });
+    }
+  };
 
   handlePrevious = (event) => {
-    const previousPage = this.state.prevURL
-    this.setState({
-      peopleURL: previousPage,
-    })
-  }
+    let unsecureURL = this.state.prevURL;
+    let previousPage;
+    if (unsecureURL) {
+      previousPage = unsecureURL.slice(0, 4) + "s" + unsecureURL.slice(4);
+      this.setState({
+        peopleURL: previousPage,
+      });
+    }
+  };
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.peopleURL !== this.state.peopleURL) {
       axios
-      .get(this.state.peopleURL)
-      .then((response) => {
-        this.setState({ 
-          characters: response.data.results,
-          nextURL: response.data.next,
-          prevURL: response.data.previous,
-         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .get(this.state.peopleURL)
+        .then((response) => {
+          this.setState({
+            characters: response.data.results,
+            nextURL: response.data.next,
+            prevURL: response.data.previous,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }
+  };
 
   render() {
     return (
       <div>
         <div className="form-container">
-          <input 
-            id="search-text" 
-            type="text" 
-            className="form-control" 
-            placeholder="Search People" 
+          <input
+            id="search-text"
+            type="text"
+            className="form-control"
+            placeholder="Search People"
             value={this.state.searchPhrase}
             onChange={this.handleChange}
             required={true}
-          />&nbsp;
-          <Button id="btn-search" className="btn-info" onClick={this.handleSearch}>Search</Button>&nbsp;
-          <Button id="btn-prev" onClick={this.handlePrevious}>Prev</Button>&nbsp;
-          <Button id="btn-next" onClick={this.handleNext}>Next</Button>
+          />
+          &nbsp;
+          <Button
+            id="btn-search"
+            className="btn-info"
+            onClick={this.handleSearch}
+          >
+            Search
+          </Button>
+          &nbsp;
+          <Button id="btn-prev" onClick={this.handlePrevious}>
+            Prev
+          </Button>
+          &nbsp;
+          <Button id="btn-next" onClick={this.handleNext}>
+            Next
+          </Button>
         </div>
         <br></br>
         <CharactersTable characters={this.state.characters} />

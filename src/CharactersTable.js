@@ -9,7 +9,7 @@ const CharactersTable = (props) => {
 
       return (
         <tr key={index}>
-          <td className="align-left">{character.name}</td>
+          <td>{character.name}</td>
           <td>{character.birth_year}</td>
           <td>{character.height}</td>
           <td>{character.mass}</td>
