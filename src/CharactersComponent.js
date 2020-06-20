@@ -7,7 +7,7 @@ class CharactersComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      peopleURL: "https://swapi.dev/api/people/",
+      peopleURL: "http://swapi.dev/api/people/",
       searchPhrase: '',
       nextURL: '',
       prevURL: '',
@@ -39,7 +39,7 @@ class CharactersComponent extends Component {
 
   handleSearch = (event) => {
     event.preventDefault();
-    const searchBaseURL = 'https://swapi.dev/api/people/?search='
+    const searchBaseURL = 'http://swapi.dev/api/people/?search='
     const newPeopleURL = `${searchBaseURL}${this.state.searchPhrase}`
     this.setState({
       peopleURL: newPeopleURL,
