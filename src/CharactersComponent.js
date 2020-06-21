@@ -46,7 +46,7 @@ class CharactersComponent extends Component {
     });
   };
 
-  handleClear = (event) => {
+  handleClear = () => {
     let searchText = this.state.searchPhrase;
     if (searchText) {
       this.setState({
@@ -56,8 +56,7 @@ class CharactersComponent extends Component {
     }
   };
 
-  secureURL = (unsecureURL) =>
-    `${unsecureURL.slice(0, 4)}s${unsecureURL.slice(4)}`;
+  secureURL = (unsecureURL) => `${unsecureURL.slice(0, 4)}s${unsecureURL.slice(4)}`;
 
   handleNext = () => {
     let unsecureURL = this.state.nextURL;
@@ -86,6 +85,7 @@ class CharactersComponent extends Component {
             characters: response.data.results,
             nextURL: response.data.next,
             prevURL: response.data.previous,
+            characterCount: response.data.count,
           });
         })
         .catch((error) => {
@@ -96,15 +96,10 @@ class CharactersComponent extends Component {
 
   render() {  
     const totalPages = Math.ceil(this.state.characterCount/10)
-    const url = this.state.peopleURL
-    const urlEnd = url.slice(url.length - 1)
-    let pageNumber
-    try {
-      pageNumber = parseInt(urlEnd)
-    } catch (error) {
-      pageNumber = 1
-    }
-
+    const urlFullPath = this.state.peopleURL
+    const urlPageNumber = urlFullPath.slice(urlFullPath.length - 1)
+    let pageNumber = parseInt(urlPageNumber)
+    
     if(isNaN(pageNumber)) {
       pageNumber = 1
     }
@@ -124,7 +119,7 @@ class CharactersComponent extends Component {
           &nbsp;
           <Button
             id="btn-search"
-            className="btn-info"
+            className="btn-secondary"
             onClick={this.handleSearch}
           >
             Search
@@ -132,24 +127,25 @@ class CharactersComponent extends Component {
           &nbsp;
           <Button
             id="btn-clear"
-            className="btn-danger"
+            className="btn-info"
             onClick={this.handleClear}
           >
             Clear
           </Button>
           &nbsp;
           <Button id="btn-prev" onClick={this.handlePrevious}>
-            Prev
+            {`<Prev`}
           </Button>
           &nbsp;
           <Button id="btn-next" onClick={this.handleNext}>
-            Next
+            {`Next>`}
           </Button>
         </div>
-        <div className="record-count-display">
-          {`Page ${pageNumber} of ${totalPages} - (${this.state.characterCount} Characters)`}
-        </div>
+        <br></br>
         <CharactersTable characters={this.state.characters} />
+        <div className="record-count-display">
+          {`(${this.state.characterCount} Characters) - Page ${pageNumber} of ${totalPages}`}
+        </div>
       </div>
     );
   }
