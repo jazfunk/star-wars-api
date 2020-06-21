@@ -12,6 +12,7 @@ class CharactersComponent extends Component {
       nextURL: "",
       prevURL: "",
       characters: [],
+      characterCount: 0,
     };
   }
 
@@ -23,6 +24,7 @@ class CharactersComponent extends Component {
           characters: response.data.results,
           nextURL: response.data.next,
           prevURL: response.data.previous,
+          characterCount: response.data.count,
         });
       })
       .catch((error) => {
@@ -31,14 +33,12 @@ class CharactersComponent extends Component {
   };
 
   handleChange = (event) => {
-    event.preventDefault();
     this.setState({
       searchPhrase: event.target.value,
     });
   };
 
   handleSearch = (event) => {
-    event.preventDefault();
     const searchBaseURL = "https://swapi.dev/api/people/?search=";
     const newPeopleURL = `${searchBaseURL}${this.state.searchPhrase}`;
     this.setState({
@@ -46,24 +46,33 @@ class CharactersComponent extends Component {
     });
   };
 
-  handleNext = (event) => {
-    let unsecureURL = this.state.nextURL;
-    let nextPage;
-    if (unsecureURL) {
-      nextPage = unsecureURL.slice(0, 4) + "s" + unsecureURL.slice(4);
+  handleClear = (event) => {
+    let searchText = this.state.searchPhrase;
+    if (searchText) {
       this.setState({
-        peopleURL: nextPage,
+        peopleURL: "https://swapi.dev/api/people/",
+        searchPhrase: "",
       });
     }
   };
 
-  handlePrevious = (event) => {
-    let unsecureURL = this.state.prevURL;
-    let previousPage;
+  secureURL = (unsecureURL) =>
+    `${unsecureURL.slice(0, 4)}s${unsecureURL.slice(4)}`;
+
+  handleNext = () => {
+    let unsecureURL = this.state.nextURL;
     if (unsecureURL) {
-      previousPage = unsecureURL.slice(0, 4) + "s" + unsecureURL.slice(4);
       this.setState({
-        peopleURL: previousPage,
+        peopleURL: this.secureURL(unsecureURL),
+      });
+    }
+  };
+
+  handlePrevious = () => {
+    let unsecureURL = this.state.prevURL;
+    if (unsecureURL) {
+      this.setState({
+        peopleURL: this.secureURL(unsecureURL),
       });
     }
   };
@@ -85,7 +94,21 @@ class CharactersComponent extends Component {
     }
   };
 
-  render() {
+  render() {  
+    const totalPages = Math.ceil(this.state.characterCount/10)
+    const url = this.state.peopleURL
+    const urlEnd = url.slice(url.length - 1)
+    let pageNumber
+    try {
+      pageNumber = parseInt(urlEnd)
+    } catch (error) {
+      pageNumber = 1
+    }
+
+    if(isNaN(pageNumber)) {
+      pageNumber = 1
+    }
+
     return (
       <div>
         <div className="form-container">
@@ -107,6 +130,14 @@ class CharactersComponent extends Component {
             Search
           </Button>
           &nbsp;
+          <Button
+            id="btn-clear"
+            className="btn-danger"
+            onClick={this.handleClear}
+          >
+            Clear
+          </Button>
+          &nbsp;
           <Button id="btn-prev" onClick={this.handlePrevious}>
             Prev
           </Button>
@@ -115,10 +146,13 @@ class CharactersComponent extends Component {
             Next
           </Button>
         </div>
-        <br></br>
+        <div className="record-count-display">
+          {`Page ${pageNumber} of ${totalPages} - (${this.state.characterCount} Characters)`}
+        </div>
         <CharactersTable characters={this.state.characters} />
       </div>
     );
   }
 }
+
 export default CharactersComponent;

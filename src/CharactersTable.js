@@ -4,9 +4,6 @@ import * as ReactBootStrap from "react-bootstrap";
 const CharactersTable = (props) => {
   const renderCharacter = (character, index) => {
     if (props.characters.length > 0) {
-      
-      // adjust any formatting here
-
       return (
         <tr key={index}>
           <td>{character.name}</td>
