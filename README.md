@@ -1,4 +1,4 @@
-# Star Wars API
+# Star Wars API Application
 A complete and searchable list of all Star Wars Characters, and their details.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -13,17 +13,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 ## Summary
-Continuing my experience and development with React/Node, Bootstrap, and Heroku; diving into the specific character details from the Star Wars online API was a journey through my childhood.  It was interesting to see all of the different datum that exists for these fictional characters.  
+Continuing my development experience with React/Node, Bootstrap, and Heroku; diving into the specific character details from the Star Wars online API was a journey reliving my childhood.  It was interesting to see all of the different datum that exists for these fictional characters.  
 
-Utilization of Postman was critical in helping quickly understand the data being pulled in from the API.  Being able to instantly see the results allowed me to correct errors to get the desired information faster.
+Utilization of Postman was critical in helping quickly understand the data being pulled in from the API using HTTP Requests.  Being able to instantly see the results allowed me get the desired result faster.
 
-This helped me better understand the JSON object, and each of the properties that exist.  Right away I noticed the "next" and "previous" url values, which told me pagination was built in.
+This helped me fully understand the JSON object, and each of the properties that exist.  Right away I noticed the "next" and "previous" URL values, which told me pagination was  built in.
 
 Additionally, I installed and implemented the Axios Library to the project directory.  Axios allows us to communicate with APIs easily in our React apps.
 
 While solidifying my knowledge of the component nature of React, and manipulating state in an appropriate manner, this application came together quickly and made the coding picture much clearer.
 
-Finally, deploying to Heroku is a snap... a breeze.  Once set up properly, it just works, and as a developer that is worth a lot.
+I spent some time implementing responsive design, where the application would size properly, regardeless of the device viewing it.  I discovered how to use object width properties relative to the size of the viewport.  Whether on your phone, or 27" triple-monitor setup, it will display proportionally.
+
+With a "Zero Configuration" deployment solution via Heroku, the application is out on the web, for all to enjoy.  
 
 ## Prerequisites & Installation
 This project requires the following to be installed to run locally:
