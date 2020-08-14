@@ -4,26 +4,40 @@ import CharactersTable from "./CharactersTable";
 import axios from "axios";
 
 class CharactersComponent extends Component {
+  PEOPLE_URL = "https://swapi.dev/api/people/";
+  SEARCH_URL = "https://swapi.dev/api/people/?search=";
+
   constructor(props) {
     super(props);
     this.state = {
-      peopleURL: "https://swapi.dev/api/people/",
+      peopleURL: this.PEOPLE_URL,
       searchPhrase: "",
       nextURL: "",
       prevURL: "",
       characters: [],
       characterCount: 0,
+      species: [],
+      homeworlds: []
     };
   }
 
   componentDidMount = () => {
     axios
       .get(this.state.peopleURL)
-      .then((response) => {
+      .then(async (response) => {
+        for (let i = 0; i < response.data.results.length; i++) {
+          const character = response.data.results[i];
+          
+          character.homeworld = await this.getData(character.homeworld);
+          character.species = character.species.length === 0 
+            ? { name: ""} 
+            : await this.getData(character.species[0]);
+        }
+
         this.setState({
           characters: response.data.results,
-          nextURL: response.data.next,
-          prevURL: response.data.previous,
+          nextURL: this.secureURL(response.data.next),
+          prevURL: this.secureURL(response.data.previous),
           characterCount: response.data.count,
         });
       })
@@ -31,6 +45,18 @@ class CharactersComponent extends Component {
         console.log(error);
       });
   };
+  
+  getHomeworlds = (url) => {
+    // check to see if this url is already in homeworlds (state)
+    // If so, return that homeworld
+    // else, maake http request for that home world
+      // when that hw comes back, store it in this.state.homeworlds
+  }
+
+  getData = (url) => {
+    return axios.get(url)
+    .then(response => response.data)
+  }
 
   handleChange = (event) => {
     this.setState({
@@ -39,39 +65,36 @@ class CharactersComponent extends Component {
   };
 
   handleSearch = (event) => {
-    const searchBaseURL = "https://swapi.dev/api/people/?search=";
-    const newPeopleURL = `${searchBaseURL}${this.state.searchPhrase}`;
     this.setState({
-      peopleURL: newPeopleURL,
+      peopleURL: `${this.SEARCH_URL}${this.state.searchPhrase}`,
     });
   };
 
   handleClear = () => {
-    let searchText = this.state.searchPhrase;
-    if (searchText) {
+    if (this.state.searchPhrase) {
       this.setState({
-        peopleURL: "https://swapi.dev/api/people/",
+        peopleURL: this.PEOPLE_URL,
         searchPhrase: "",
       });
     }
   };
 
-  secureURL = (unsecureURL) => `${unsecureURL.slice(0, 4)}s${unsecureURL.slice(4)}`;
+  secureURL = (unsecureURL) => unsecureURL 
+    ? `${unsecureURL.slice(0, 4)}s${unsecureURL.slice(4)}` 
+    : unsecureURL;
 
   handleNext = () => {
-    let unsecureURL = this.state.nextURL;
-    if (unsecureURL) {
+    if (this.state.nextURL) {
       this.setState({
-        peopleURL: this.secureURL(unsecureURL),
+        peopleURL: this.state.nextURL,
       });
     }
   };
 
   handlePrevious = () => {
-    let unsecureURL = this.state.prevURL;
-    if (unsecureURL) {
+    if (this.state.prevURL) {
       this.setState({
-        peopleURL: this.secureURL(unsecureURL),
+        peopleURL: this.state.prevURL,
       });
     }
   };
@@ -80,11 +103,20 @@ class CharactersComponent extends Component {
     if (prevState.peopleURL !== this.state.peopleURL) {
       axios
         .get(this.state.peopleURL)
-        .then((response) => {
+        .then(async (response) => {   
+        for (let i = 0; i < response.data.results.length; i++) {
+          const character = response.data.results[i];
+          
+          character.homeworld = await this.getData(character.homeworld);
+          character.species = character.species.length === 0 
+            ? { name: ""} 
+            : await this.getData(character.species[0]);
+
+        }
           this.setState({
             characters: response.data.results,
-            nextURL: response.data.next,
-            prevURL: response.data.previous,
+            nextURL: this.secureURL(response.data.next),
+            prevURL: this.secureURL(response.data.previous),
             characterCount: response.data.count,
           });
         })

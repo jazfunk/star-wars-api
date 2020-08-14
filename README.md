@@ -32,9 +32,16 @@ This project requires the following to be installed to run locally:
 * [Node](https://nodejs.org/en/)
 * Npm
 
+
 Installing Node will provide access to `npm`.
 
-After Node/Npm installation is complete, run the web server:
+
+After Node/Npm installation is complete, run the npm installation:
+```
+npm i
+```
+
+Run the web server:
 ```
 npm start
 ```
